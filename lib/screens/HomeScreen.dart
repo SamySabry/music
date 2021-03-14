@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music/config/AppConfig.dart';
+import 'package:music/config/AppRoutes.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -21,6 +22,14 @@ class _HomeScreenState extends State<HomeScreen>
                 child:Text(AppConfig.App_Name,style:  Theme.of(context).textTheme.headline1,)
               ),
             ),
+            FlatButton(
+              child: Text("sign up"),
+              onPressed: ()
+              {
+                Navigator.pushNamed(context, AppRoutes.registerRoute);
+
+              },
+            )
 
           ],
         ),

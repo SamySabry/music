@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094521359678",
+    "project_id": "music-5d9b4",
+    "storage_bucket": "music-5d9b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094521359678:android:b2e93508d174317b97b06f",
+        "android_client_info": {
+          "package_name": "com.essammy.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094521359678-otpql9ct2irke9g02lhpeb56bbh3hjgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd4KBqxinGwIG9ZtAAQ38GL5d7dPzz3UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094521359678-otpql9ct2irke9g02lhpeb56bbh3hjgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

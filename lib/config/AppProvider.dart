@@ -1,3 +1,4 @@
+import 'package:music/providers/AuthProvider.dart';
 import 'package:music/providers/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -17,6 +18,9 @@ List<SingleChildWidget> providers() {
   return [
     ChangeNotifierProvider<ThemeProvider>(
       create: (_) => ThemeProvider(),
+    ),
+    ChangeNotifierProvider<AuthProvider>(
+      create: (_) => AuthProvider(),
     ),
 
   ];

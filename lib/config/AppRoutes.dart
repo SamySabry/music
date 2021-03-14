@@ -9,14 +9,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:music/screens/HomeScreen.dart';
+import 'package:music/screens/auth/RegisterScreen.dart';
 
 class AppRoutes {
   static const home = 'home';
+  static const registerRoute = '/registerRoute';
 
 
   Map<String, WidgetBuilder> routes() {
     return {
       home: (context) => HomeScreen(),
+      registerRoute: (context) => RegisterScreen(),
+
     };
   }
 }
