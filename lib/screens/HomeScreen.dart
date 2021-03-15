@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:music/config/AppConfig.dart';
 import 'package:music/config/AppRoutes.dart';
 
+import 'auth/LoginScreen.dart';
+import 'auth/LoginScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
   @override
@@ -27,6 +30,13 @@ class _HomeScreenState extends State<HomeScreen>
               onPressed: ()
               {
                 Navigator.pushNamed(context, AppRoutes.registerRoute);
+
+              },
+            ), FlatButton(
+              child: Text("sign in"),
+              onPressed: ()
+              {
+                Navigator.pushNamed(context, AppRoutes.loginRoute);
 
               },
             )

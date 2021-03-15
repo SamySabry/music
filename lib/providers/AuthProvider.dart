@@ -29,7 +29,6 @@ class AuthProvider extends ChangeNotifier {
   */
 
 
-
 /*
  * Auth Authenticate
  *
@@ -42,7 +41,6 @@ class AuthProvider extends ChangeNotifier {
  */
 
   Future autoAuthenticate() async {
-
     isLoaded = true;
 
     notifyListeners();
@@ -60,17 +58,12 @@ class AuthProvider extends ChangeNotifier {
   * Add your http code here and save user profile.
   */
   Future<String> singUpWithEmail(Map<String, dynamic> formData) async {
-
-
     isLoaded = false;
     notifyListeners();
     String errorMsg;
-
-
     try {
-   //   print(formData["email"]);
-      // print(formData["password"]);
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
           email: formData["email"],
           password: formData["password"]
       );
@@ -78,54 +71,60 @@ class AuthProvider extends ChangeNotifier {
       switch (error.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
           {
-              errorMsg = "This email is already in use.";
-              isLoaded = false;
+            errorMsg = "This email is already in use.";
+            isLoaded = false;
           }
           break;
         case "ERROR_WEAK_PASSWORD":
           {
-              errorMsg = "The password must be 6 characters long or more.";
-              isLoaded = false;
+            errorMsg = "The password must be 6 characters long or more.";
+            isLoaded = false;
           }
           break;
         default:
           {
             errorMsg = error.code;
-
           }
       }
-
-
-
-    //////
-
-
-
-
-
-/*
-
-    final response = await post('users', formData);
-    final Map<String, dynamic> jsonMap = json.decode(response.body);
-
-    if (response.statusCode == 200) {
     }
-    else
-      if (response.statusCode == 400) {
-      error = jsonMap['data']['message'];
-    }
-    //Todo: Validation error is different on email or password change..
-    else
-      if (response.statusCode == 422 || response.statusCode == 401) {
-      jsonMap['errors'].forEach((key, value) {
-        jsonMap['errors'][key] = value;
-
-        error = value[0]; //string interpolation in action
-      });
-    }
-*/
     isLoaded = true;
     notifyListeners();
     return errorMsg;
   }
-}}
+
+
+  Future<String> singInWithEmail(Map<String, dynamic> formData) async {
+    isLoaded = false;
+    notifyListeners();
+    String errorMsg;
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: formData["username"],
+          password: formData["password"]
+      );
+    } on FirebaseAuthException catch (error) {
+      switch (error.code) {
+        case "user-not-found":
+          {
+            errorMsg = "This email not found";
+            isLoaded = false;
+          }
+          break;
+        case "wrong-password":
+          {
+            errorMsg = "check your mail or password";
+            isLoaded = false;
+          }
+          break;
+        default:
+          {
+            errorMsg = "something wrong";
+          }
+      }
+    }
+    isLoaded = true;
+    notifyListeners();
+    return errorMsg;
+  }
+}
