@@ -34,8 +34,9 @@ dependencies:
   provider:
   flushbar:
   firebase_auth:
- # cloud_firestore:
   firebase_core:
+  cloud_firestore: '>=0.14.0 <1.0.1'
+
 
 
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:music/config/AppConfig.dart';
 import 'package:music/config/AppRoutes.dart';
@@ -14,8 +15,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
 
+
   @override
   Widget build(BuildContext context) {
+    print("be");
+    var firebaseUser =  FirebaseAuth.instance.currentUser;
+print("af");
     return Scaffold(
       body:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,6 +28,11 @@ class _HomeScreenState extends State<HomeScreen>
             Expanded(
               child: Center(
                 child:Text(AppConfig.App_Name,style:  Theme.of(context).textTheme.headline1,)
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child:Text(firebaseUser.uid!=null?firebaseUser.uid :"no user",style: TextStyle(fontSize: 20),)
               ),
             ),
             FlatButton(

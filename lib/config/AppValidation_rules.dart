@@ -17,13 +17,13 @@ String validateEmail(String value) {
 
 String validatePassword(String value) {
   if (value.length < 1) return 'Enter a password';
-  if (value.length < 6) return 'Password must be 6 chrachter long';
+  if (value.length < 5) return 'Password must be 6 chrachter long';
   return null;
 }
 
 String validateConfirmPassword(String value, String value2) {
   if (value.length < 1) return 'Re enter password';
-  if (value.length < 6) return 'Password must be 6 chrachter long';
+  if (value.length < 5) return 'Password must be 6 chrachter long';
   if (value != value2) return 'Confirm Password should match password';
   return null;
 }

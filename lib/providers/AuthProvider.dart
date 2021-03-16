@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:music/model/User.dart' as Person;
 
 import 'package:provider/provider.dart';
 
@@ -57,16 +59,26 @@ class AuthProvider extends ChangeNotifier {
   * Sign Up With Email
   * Add your http code here and save user profile.
   */
-  Future<String> singUpWithEmail(Map<String, dynamic> formData) async {
+  Future<String> singUpWithEmail(Person.User user) async {
     isLoaded = false;
     notifyListeners();
     String errorMsg;
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-          email: formData["email"],
-          password: formData["password"]
+          email: user.email,
+          password: user.password
       );
+          final firestoreInstance =   FirebaseFirestore.instance;
+          print("\n\n\n\n\n\n\n\n");
+print(userCredential.user.uid);
+      print( user.email);
+      print(user.password);
+     await firestoreInstance.collection("users").doc(userCredential.user.uid).set({
+                "email" : user.email,
+                "fname" : user.password,
+              });
+
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:music/config/AppConfig.dart';
 import 'package:music/config/AppRoutes.dart';
 import 'package:music/config/AppValidation_rules.dart';
+import 'package:music/model/User.dart';
 import 'package:music/providers/AuthProvider.dart';
 import 'package:music/widgtes/BaseBlocButton.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen>  {
 
-  final Map<String, dynamic> formData = {'email': null, 'password': null};
+  User user= User.inti();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var passKey = GlobalKey<FormFieldState>();
   var media;
@@ -26,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen>  {
       ),
       validator: (value) => validateName(value),
       onSaved: (String value) {
-        formData['first_name'] = value;
+        user.firstName = value;
       },
     );
   }
@@ -36,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen>  {
       decoration: InputDecoration(labelText: 'email'),
       validator: (value) => validateEmail(value),
       onSaved: (String value) {
-        formData['email'] = value;
+        user.email = value;
       },
     );
   }
@@ -49,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen>  {
       validator: (value) => validatePassword(value),
       obscureText: true,
       onSaved: (String value) {
-        formData['password'] = value;
+        user.password = value;
       },
     );
   }
@@ -96,9 +97,8 @@ class _RegisterScreenState extends State<RegisterScreen>  {
     if (_formKey.currentState.validate() && _termsChecked) {
       // If all data are correct then save data to out variables
       _formKey.currentState.save();
-      formData['AUTH_KEY'] = AppConfig.API_AUTH_KEY;
 
-    await  provider.singUpWithEmail(formData).then((response) {
+    await  provider.singUpWithEmail(user).then((response) {
         response != null
             ? Flushbar(
                 backgroundColor:
