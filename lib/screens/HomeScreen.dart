@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:music/config/AppConfig.dart';
 import 'package:music/config/AppRoutes.dart';
 
 import 'auth/LoginScreen.dart';
 import 'auth/LoginScreen.dart';
+import 'auth/UserAccountPage.dart';
+import 'exploreScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -15,41 +18,65 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
 
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    print("be");
-    var firebaseUser =  FirebaseAuth.instance.currentUser;
-print("af");
+
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color: Theme.of(context).colorScheme.surface,
+        child: TabBar(
+            controller: tabController,
+            indicatorColor: Theme.of(context).primaryColor,
+            indicatorWeight: 2.0,
+            indicatorSize: TabBarIndicatorSize.label,
+            labelColor: Theme.of(context).primaryColor,
+            labelStyle: TextStyle(fontSize: 12),
+            unselectedLabelColor: Colors.grey,
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Octicons.telescope),
+              ),
+              Tab(
+                icon: Icon(Octicons.settings),
+              ),
+            ]),
+      ),
+
+
+
+
+
       body:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              child: Center(
-                child:Text(AppConfig.App_Name,style:  Theme.of(context).textTheme.headline1,)
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child:Text(firebaseUser.uid!=null?firebaseUser.uid :"no user",style: TextStyle(fontSize: 20),)
-              ),
-            ),
-            FlatButton(
-              child: Text("sign up"),
-              onPressed: ()
-              {
-                Navigator.pushNamed(context, AppRoutes.registerRoute);
 
-              },
-            ), FlatButton(
-              child: Text("sign in"),
-              onPressed: ()
-              {
-                Navigator.pushNamed(context, AppRoutes.loginRoute);
+            Expanded(
+              child: Container(
+                child: TabBarView(
+                  controller: tabController,
+                  children: <Widget>[
+                    ExploreScreen(),
 
-              },
+                    UserAccountPage(),
+                  ],
+                ),
+              ),
             )
+
+
+
+
+
 
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 import 'package:music/config/AppRoutes.dart';
 import 'package:music/config/AppValidation_rules.dart';
+import 'package:music/model/User.dart';
 import 'package:music/providers/AuthProvider.dart';
 import 'package:music/widgtes/BaseAppIcon.dart';
 import 'package:music/widgtes/BaseBlocButton.dart';
@@ -14,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen>  {
-  final Map<String, dynamic> formData = {'username': null, 'password': null};
+  User user= User.inti();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   var media;
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen>  {
       ),
       validator: (value) => validateEmail(value),
       onSaved: (String value) {
-        formData['username'] = value;
+        user.email = value;
       },
     );
   }
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen>  {
       validator: (value) => validatePassword(value),
       obscureText: true,
       onSaved: (String value) {
-        formData['password'] = value;
+        user.password = value;
       },
     );
   }
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen>  {
       _formKey.currentState.save();
 
       //Call Auth Provider here...
-      provider.singInWithEmail(formData).then((response) {
+      provider.singInWithEmail(user).then((response) {
         response != null
             ? Flushbar(
                 backgroundColor:

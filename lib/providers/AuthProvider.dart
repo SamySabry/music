@@ -21,6 +21,10 @@ class AuthProvider extends ChangeNotifier {
   bool inputerror = false;
   String errorMsg;
   bool check = true;
+  Person.User _user;
+
+
+  Person.User get user => _user;
 
   bool get isLoggedIn => _isLoggedIn;
 
@@ -76,7 +80,7 @@ print(userCredential.user.uid);
       print(user.password);
      await firestoreInstance.collection("users").doc(userCredential.user.uid).set({
                 "email" : user.email,
-                "fname" : user.password,
+                "fname" : user.firstName,
               });
 
     } on FirebaseAuthException catch (error) {
@@ -105,16 +109,27 @@ print(userCredential.user.uid);
   }
 
 
-  Future<String> singInWithEmail(Map<String, dynamic> formData) async {
+  Future<String> singInWithEmail(Person.User user) async {
     isLoaded = false;
     notifyListeners();
     String errorMsg;
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-          email: formData["username"],
-          password: formData["password"]
+          email: user.email,
+          password: user.password
       );
+
+      final firestoreInstance =   FirebaseFirestore.instance;
+
+      firestoreInstance.collection("users").doc(userCredential.user.uid).get().then((value){
+        print(userCredential.user.uid);
+        print("\n\n\n\n\n\n\n\n");
+        print(value.data());
+        set_User(value);
+      });
+
+
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
         case "user-not-found":
@@ -139,4 +154,14 @@ print(userCredential.user.uid);
     notifyListeners();
     return errorMsg;
   }
+void set_User(var doc)
+{
+  _user=Person.User.s(doc.id, doc.data()["email"], doc.data()["fname"]);
+  print("good\nn\n\n\n\n");
+}
+  void logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+
 }

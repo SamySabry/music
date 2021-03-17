@@ -1,7 +1,7 @@
 
 
 class User {
-    int _id;
+    String _id;
    String _email;
    String _firstName;
     String _password;
@@ -11,15 +11,17 @@ class User {
 
     User(this._id, this._email, this._firstName, this._password);
 
+    User.s(this._id, this._email, this._firstName);
+
     String get password => _password;
 
     set password(String value) {
       _password = value;
     }
 
-    int get id => _id;
+    String get id => _id;
 
-  set id(int value) {
+  set id(String value) {
     _id = value;
   }
 
