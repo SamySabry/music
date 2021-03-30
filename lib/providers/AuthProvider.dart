@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:music/model/User.dart' as Person;
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   //Constructor
@@ -35,22 +36,7 @@ class AuthProvider extends ChangeNotifier {
   */
 
 
-/*
- * Auth Authenticate
- *
- * Auto authentication help to get user data from shared preferences
- * and save as user user object. which can be access anywhere
- * in the app.
- * 
- * please check page-user-account.dart for example
- * 
- */
 
-  Future autoAuthenticate() async {
-    isLoaded = true;
-
-    notifyListeners();
-  }
 
   /*
   * Logout
@@ -154,13 +140,59 @@ print(userCredential.user.uid);
     notifyListeners();
     return errorMsg;
   }
-void set_User(var doc)
-{
+Future<void> set_User(var doc)
+async {
+  final _prefs = await SharedPreferences.getInstance();
   _user=Person.User.s(doc.id, doc.data()["email"], doc.data()["fname"]);
   print("good\nn\n\n\n\n");
+  _prefs.setString('user', jsonEncode(user));
+  _isLoggedIn = true;
+notifyListeners();
 }
+
+
+/*
+ * Auth Authenticate
+ *
+ * Auto authentication help to get user data from shared preferences
+ * and save as user user object. which can be access anywhere
+ * in the app.
+ *
+ * please check page-user-account.dart for example
+ *
+ */
+
+  Future autoAuthenticate() async {
+
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    String prefUser = _prefs.getString('user');
+    if (prefUser != null) {
+      _user = Person.User.fromJson(jsonDecode(prefUser));
+    }
+
+    if (_user != null) {
+      _isLoggedIn = true;
+    }
+    isLoaded = true;
+
+    notifyListeners();
+  }
+
+  /*
+  * Logout
+  *
+  * Clear user preference & user
+  */
+
+
+
   void logout() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
     await FirebaseAuth.instance.signOut();
+    _user = null;
+    _prefs.clear();
+    _isLoggedIn = false;
+    notifyListeners();
   }
 
 

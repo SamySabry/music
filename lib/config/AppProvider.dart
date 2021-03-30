@@ -1,4 +1,6 @@
 import 'package:music/providers/AuthProvider.dart';
+import 'package:music/providers/ExploreProvider.dart';
+import 'package:music/providers/listTracksProvider.dart';
 import 'package:music/providers/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -22,6 +24,13 @@ List<SingleChildWidget> providers() {
     ChangeNotifierProvider<AuthProvider>(
       create: (_) => AuthProvider(),
     ),
+    ChangeNotifierProvider<ExploreProvider>(
+      create: (_) => ExploreProvider(),
+    ),
+  /*  ChangeNotifierProvider<ListTracksProvider>(
+      create: (_) => ListTracksProvider(),
+    ),
+*/
 
   ];
 }

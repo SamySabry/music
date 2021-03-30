@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen>  {
                 titleText: Text('ops'),
                 messageText: Text(response),
               ).show(context)
-            : Navigator.pushNamed(context, AppRoutes.home);
+            : Navigator.pushReplacementNamed(context, AppRoutes.loginRoute);
       });
     } else {
       //   If all data are not valid then start auto validation.

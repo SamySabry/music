@@ -8,13 +8,7 @@ class AppConfig {
    * Screen Data
    * ----------------------------------------------*/
    static const App_Name= 'MUSIC';
-
-
-
-   static const API_BASE = 'xvelopers.com';
-   static const API_PATH = 'wp/themes/rekord/wp-json/wl/v1';
-   static const API_URL = 'https://$API_BASE/$API_PATH';
-   static const API_AUTH_KEY = 'rekord';
+   static const API_URL =  "https://api.deezer.com/search/album?q=eminem";
 
    /*------------------------------------------------
    * Screen Data

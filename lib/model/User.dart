@@ -39,4 +39,29 @@ class User {
     _firstName = value;
   }
 
+
+
+   static User fromJson(Map<String, dynamic> json)
+    {
+      return User.s(
+       json['id'] as String,
+        json['email'] as String,
+        json['firstName'] as String,
+      );
+    }
+
+    Map<String, dynamic> toJson()
+    {
+      return {
+        'id': this.id,
+        'email': this.email,
+        'firstName': this.firstName,
+
+      };
+    }
+
+
+
+
+
 }
