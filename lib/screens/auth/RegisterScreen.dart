@@ -87,12 +87,10 @@ class _RegisterScreenState extends State<RegisterScreen>  {
   }
 
   _submit(BuildContext context, AuthProvider provider) async {
-    print("/n/n/n/n/n up/n/n/n/n/n/n");
 
     setState(() {
       errorShow = _termsChecked;
     });
-    print("/n/n/n/n/n up/n/n/n/n/n/n");
 
     if (_formKey.currentState.validate() && _termsChecked) {
       // If all data are correct then save data to out variables

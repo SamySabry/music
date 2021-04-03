@@ -10,7 +10,6 @@ class AlbumList extends StatelessWidget {
 
   _buildGridItem(BuildContext context, Album album) => InkWell(
     onTap: () async {
-      print(album.cover);
 
 
       Navigator.of(context).pushNamed(

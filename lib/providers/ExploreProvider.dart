@@ -28,7 +28,6 @@ class ExploreProvider extends ChangeNotifier {
       final Map<String, dynamic> jsonMap = json.decode(response.body);
 
       List<dynamic> jsonItems = jsonMap["data"];
-      print(jsonItems);
       if (jsonItems.length == 0) {
         _albums= [];
       }

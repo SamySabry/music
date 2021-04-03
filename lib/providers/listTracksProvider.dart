@@ -22,15 +22,12 @@ class ListTracksProvider extends ChangeNotifier {
     //notifyListeners();
     var url =trackLink;
     final http.Response response = await http.get(url);
-    print("\n\n\n\n this staue =   ${response.statusCode} \n\n\n");
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonMap = json.decode(response.body);
 
       List<dynamic> jsonItems = jsonMap["data"];
-      print("\n\n\n\ndata of list tracks \n\n\n");
-      print(jsonItems);
-      print(jsonItems.length );
+
 
       if (jsonItems.length == 0) {
         _tracks= [];

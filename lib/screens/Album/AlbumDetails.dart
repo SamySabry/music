@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:music/model/Album.dart';
+import 'package:music/providers/FavouritesProvider.dart';
 import 'package:music/providers/listTracksProvider.dart';
 import 'package:music/widgtes/CustomCircularProgressIndicator.dart';
+import 'package:music/widgtes/Track/TrackFavouriteButton.dart';
 import 'package:music/widgtes/common/Image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -83,7 +85,8 @@ class _AlbumDetailsState extends State<AlbumDetails> {
                           flex: 2,
                           child: Provider
                               .of<ListTracksProvider>(context)
-                              .isloaded ?
+                              .isloaded & Provider.of<FavouritesProvider>(context)
+                              .isLoaded?
                           //  true?
 
                           ListView.builder(
@@ -112,14 +115,7 @@ class _AlbumDetailsState extends State<AlbumDetails> {
                                 value.tracks[index].duration,
                                 style: TextStyle(fontSize: 11),
                                 ),
-                                IconButton(
-                                icon: Icon(
-                                AntDesign.hearto
-                                ),
-                                iconSize: 20,
-                                color:Theme.of(context).primaryColor,
-                                onPressed: () {
-                                }),
+                                  TrackFavouriteButton(value.tracks[index],20.0),
 
                                 Icon(
                                 Icons.more_vert,

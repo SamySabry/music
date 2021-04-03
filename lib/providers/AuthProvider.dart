@@ -60,10 +60,7 @@ class AuthProvider extends ChangeNotifier {
           password: user.password
       );
           final firestoreInstance =   FirebaseFirestore.instance;
-          print("\n\n\n\n\n\n\n\n");
-print(userCredential.user.uid);
-      print( user.email);
-      print(user.password);
+
      await firestoreInstance.collection("users").doc(userCredential.user.uid).set({
                 "email" : user.email,
                 "fname" : user.firstName,
@@ -109,9 +106,6 @@ print(userCredential.user.uid);
       final firestoreInstance =   FirebaseFirestore.instance;
 
       firestoreInstance.collection("users").doc(userCredential.user.uid).get().then((value){
-        print(userCredential.user.uid);
-        print("\n\n\n\n\n\n\n\n");
-        print(value.data());
         set_User(value);
       });
 
@@ -144,7 +138,6 @@ Future<void> set_User(var doc)
 async {
   final _prefs = await SharedPreferences.getInstance();
   _user=Person.User.s(doc.id, doc.data()["email"], doc.data()["fname"]);
-  print("good\nn\n\n\n\n");
   _prefs.setString('user', jsonEncode(user));
   _isLoggedIn = true;
 notifyListeners();

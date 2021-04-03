@@ -4,6 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:music/config/AppConfig.dart';
 import 'package:music/config/AppRoutes.dart';
 
+import 'Favorites/FavouritesScreen.dart';
 import 'auth/LoginScreen.dart';
 import 'auth/LoginScreen.dart';
 import 'auth/UserAccountPage.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
 
@@ -47,6 +48,9 @@ class _HomeScreenState extends State<HomeScreen>
                 icon: Icon(Octicons.telescope),
               ),
               Tab(
+                icon: Icon(AntDesign.hearto),
+              ),
+              Tab(
                 icon: Icon(Octicons.settings),
               ),
             ]),
@@ -66,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
                   controller: tabController,
                   children: <Widget>[
                     ExploreScreen(),
-
+                    FavouritesScreen(),
                     UserAccountPage(),
                   ],
                 ),

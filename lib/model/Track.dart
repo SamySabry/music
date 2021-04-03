@@ -12,6 +12,9 @@ class Track {
     this.duration= ((duration/60).round()).toString()+" : "+(duration%60).toString();
   }
 
+  Track.fromstorage({this.id, this.titleShort, this.duration, this.trackPosition,
+      this.preview, this.artist});
+
   int id;
   String titleShort;
   String duration;
@@ -28,6 +31,14 @@ class Track {
     artist: Artist.fromJson(json["artist"]),
   );
 
+  factory Track.fromJsonStorage(Map<String, dynamic> json) => Track.fromstorage(
+    id: json["id"],
+    titleShort: json["title_short"],
+    duration: json["duration"],
+    trackPosition: json["track_position"],
+    preview: json["preview"],
+    artist: Artist.fromJson(json["artist"]),
+  );
   Map<String, dynamic> toJson() => {
     "id": id,
     "title_short": titleShort,
