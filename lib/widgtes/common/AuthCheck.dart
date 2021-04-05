@@ -10,7 +10,6 @@ class AuthCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider provider = Provider.of<AuthProvider>(context);
-    print(provider.isLoggedIn);
     return Container(
       child: provider.isLoggedIn ? child : redirect ,
     );

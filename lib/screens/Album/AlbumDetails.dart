@@ -4,6 +4,7 @@ import 'package:music/providers/FavouritesProvider.dart';
 import 'package:music/providers/listTracksProvider.dart';
 import 'package:music/widgtes/CustomCircularProgressIndicator.dart';
 import 'package:music/widgtes/Track/TrackFavouriteButton.dart';
+import 'package:music/widgtes/Track/TrackPlayButton.dart';
 import 'package:music/widgtes/common/Image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -105,7 +106,7 @@ class _AlbumDetailsState extends State<AlbumDetails> {
                                 style: TextStyle(
                                 color: Theme.of(context).colorScheme.primaryVariant),
                                 ),
-                                leading: Icon(SimpleLineIcons.control_play),
+                                leading: TrackPlayButton(url:value.tracks[index].preview),
                                 trailing: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,

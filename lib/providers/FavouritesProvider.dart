@@ -68,20 +68,16 @@ class FavouritesProvider  extends ChangeNotifier
 
   bool checkContains(Track track)
   {
-    print("\n\n ${track.id}  need to check\n\n");
 
     for (Track t in _favoriteTracks)
       {
-        print(t.id);
-        print("\n");
+
         if(track.id==t.id)
           {
-            print("true");
             return true;
           }
 
       }
-    print("false");
     return false;
 
   }

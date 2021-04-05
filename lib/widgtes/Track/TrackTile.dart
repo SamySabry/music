@@ -4,12 +4,13 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:music/providers/FavouritesProvider.dart';
 import 'package:provider/provider.dart';
 
+import 'TrackPlayButton.dart';
+
 
 
 class TrackTile extends StatelessWidget {
   final Track track;
   TrackTile({this.track});
-
   @override
   Widget build(BuildContext context) {
     FavouritesProvider favouriteProvider = Provider.of<FavouritesProvider>(context);
@@ -27,7 +28,7 @@ class TrackTile extends StatelessWidget {
           style: TextStyle(
               color: Theme.of(context).colorScheme.primaryVariant),
         ),
-        leading: Icon(SimpleLineIcons.control_play),
+        leading: TrackPlayButton(url:track.preview),
         trailing: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
